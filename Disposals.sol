@@ -5,11 +5,12 @@ pragma solidity 0.8.19;
 contract Disposals {
   // STRUCTS =========================
   struct Disposal {
-    bytes8 device_code;
+    bytes8 device_uuid;
+    uint32 collector_id;
+    uint32 consumer_id;
+    uint32 manufacturer_id;
     uint32 product_id;
-    uint32 recipient_id;
-    uint32 sender_id;
-    uint32 timestamp;
+    uint32 recycler_id;
   }
 
   // STATE VARIABLES =================
@@ -17,23 +18,24 @@ contract Disposals {
   mapping(uint32 => uint32) quantities; // product id -> amount disposed
 
   // EVENTS ==========================
-  event OnDispose(bytes8 device_code, uint32 product_id);
+  event OnDispose(bytes8 device_uuid, uint32 product_id);
 
   // FUNCTIONS =======================
   function dispose(
-    bytes8 _device_code,
+    bytes8 _device_uuid,
+    uint32 _collector_id,
+    uint32 _consumer_id,
+    uint32 _manufacturer_id,
     uint32 _product_id,
-    uint32 _recipient_id,
-    uint32 _sender_id,
-    uint32 _timestamp
+    uint32 _recycler_id
   ) public returns (uint64) {
-    disposals[_device_code] = Disposal(_device_code, _product_id, _recipient_id, _sender_id, _timestamp);
+    disposals[_device_uuid] = Disposal(_device_uuid, _collector_id, _consumer_id, _manufacturer_id, _product_id, _recycler_id,);
     // add disposal to the respective product quantity
     quantities[_product_id] += 1;
     // emit event about disposal
-    emit OnDispose(_device_code, _product_id);
-    // return _device_code in numeric form
-    return (uint64(_device_code));
+    emit OnDispose(_device_uuid, _product_id);
+    // return _device_uuid in numeric form
+    return (uint64(_device_uuid));
   }
 
   function getQuantityOf(
