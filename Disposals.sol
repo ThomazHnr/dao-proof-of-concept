@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: LICENSED
+// SPDX-License-Identifier: UNLICENSED
 
 pragma solidity 0.8.19;
 
@@ -29,7 +29,14 @@ contract Disposals {
     uint32 _product_id,
     uint32 _recycler_id
   ) public returns (uint64) {
-    disposals[_device_uuid] = Disposal(_device_uuid, _collector_id, _consumer_id, _manufacturer_id, _product_id, _recycler_id,);
+    disposals[_device_uuid] = Disposal(
+      _device_uuid,
+      _collector_id,
+      _consumer_id,
+      _manufacturer_id,
+      _product_id,
+      _recycler_id
+    );
     // add disposal to the respective product quantity
     quantities[_product_id] += 1;
     // emit event about disposal

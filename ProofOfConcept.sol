@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: LICENSED
+// SPDX-License-Identifier: UNLICENSED
 
 pragma solidity 0.8.19;
 
@@ -51,7 +51,14 @@ contract ProofOfConcept {
     // Steps 4 to 6 don't have interactions with the DAO's smart contracts
 
     // 7. Recycling center announces the disposal of the residue
-    disposing_operation_id = CDisposals.dispose( 0x123456789abcdef0, collector_id, consumer_id, manufacturer_id, product_id, recycler_id);
+    disposed_device_id = CDisposals.dispose(
+      0x123456789abcdef0,
+      collector_id,
+      consumer_id,
+      manufacturer_id,
+      product_id,
+      recycler_id
+    );
 
     // 6. Computing credits for involved stakeholders
     CCredits.giveCreditTo(manufacturer_id, 100);
@@ -59,7 +66,7 @@ contract ProofOfConcept {
     CCredits.giveCreditTo(collector_id, 100);
     CCredits.giveCreditTo(recycler_id, 100);
 
-    // 7. Observer queries the amount of discarded residues 
+    // 7. Observer queries the amount of discarded residues
     amount_of_disposed_devices = CDisposals.getQuantityOf(product_id);
 
     // 8. Observer queries the constitution of discarded e-waste
