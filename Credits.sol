@@ -18,7 +18,7 @@ contract Credits {
 
   function giveCreditTo(
     uint32 _beneficiary_id,
-    uint8 _amount
+    uint16 _amount
   ) public {
     credits[_beneficiary_id] += _amount;
     emit OnGiveCredit(_beneficiary_id, _amount);

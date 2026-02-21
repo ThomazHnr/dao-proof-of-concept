@@ -12,7 +12,7 @@ contract Materials {
   }
 
   // STATE VARIABLES =================
-  uint32 index = 1; // ind ex starts at 1 to facilitate testing
+  uint32 index = 1; // index starts at 1 to facilitate testing
   mapping(uint32 => Material) materials; // index -> Material
   mapping(uint32 => uint32[]) materials_of; // product id -> index[]
 
